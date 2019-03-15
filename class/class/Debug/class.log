@@ -1,2 +1,2 @@
-﻿  class3.cpp
-  class.vcxproj -> C:\Users\구건모\Desktop\개발\STL\class\Debug\class.exe
+﻿  class6.cpp
+c:\users\구건모\desktop\개발\stl\class\class\class6.cpp(43): error C2276: '&': 바인딩된 멤버 함수 식의 연산이 잘못되었습니다.

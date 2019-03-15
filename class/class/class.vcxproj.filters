@@ -27,6 +27,12 @@
     <ClCompile Include="class4.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="class5.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="class6.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="class2_save.h">
