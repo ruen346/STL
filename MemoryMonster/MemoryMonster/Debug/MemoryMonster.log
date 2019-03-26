@@ -1,5 +1,7 @@
-﻿  소스.cpp
+﻿  MemoryMonster.cpp
+  소스.cpp
 c:\users\구건모\desktop\개발\stl\memorymonster\memorymonster\save.h(29): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\time.h(476): note: 'ctime' 선언을 참조하십시오.
-소스.obj : error LNK2005: "void __cdecl save(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?save@@YAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)이(가) MemoryMonster.obj에 이미 정의되어 있습니다.
-C:\Users\구건모\Desktop\개발\STL\MemoryMonster\Debug\MemoryMonster.exe : fatal error LNK1169: 여러 번 정의된 기호가 있습니다.
+c:\users\구건모\desktop\개발\stl\memorymonster\memorymonster\소스.cpp(24): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  코드를 생성하고 있습니다...
+  MemoryMonster.vcxproj -> C:\Users\구건모\Desktop\개발\STL\MemoryMonster\Debug\MemoryMonster.exe

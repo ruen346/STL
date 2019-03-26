@@ -1,24 +1,32 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include <iterator>
+// #include <initializer_list>
+#include <array>
 #include "MemoryMonster.h"
 #include "save.h"
-using namespace std;
 
-// 62p 1번문제
-// std::string 객체로 된 배열을 정의하고, 자신이 선택한 단어들로 초기화한 후
-// 반복자를 사용해 배열의 내용을 한 줄에 하나씩 출력하는 프로그램을 작성하라
+// 2장 순차 컨테이너
+// - array
+// - vector
+// - deque
+// - list
+// - forward_list
 
 
 int main()
 {
-	string s[5]{"3월", "22일", "MT", "베어스타운", "미세먼지없음"};
+	array<MemoryMonster, 5> a{10,3,30,7,20};
 
-	auto b = begin(s);
+	// a의 각 원소를 오름차순으로 정렬하라
 
-	while (b != end(s))
+	for (int i = 0; i < a.size(); i++)
 	{
-		cout << *b << endl;		
-		++b;
+		char* p = a[i].getP();
+		sort(p, p + a[i].get());
+
+		cout << a[i] << endl;
 	}
 
 	save("소스.cpp");

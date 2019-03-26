@@ -6,7 +6,6 @@
 // 정수를 인자로 받아 그 숫자만큼 세이브 한다.
 //---------------------------------------------------------
 #include <random>
-#include "save.h"
 using namespace std;
 
 
@@ -35,6 +34,8 @@ public:
 	void set(int n);
 
 	int get() const;
+
+	char* getP() const;
 
 	friend ostream& operator<<(ostream&, const MemoryMonster&);
 };

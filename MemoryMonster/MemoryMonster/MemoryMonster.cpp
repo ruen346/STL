@@ -1,5 +1,4 @@
 #include "MemoryMonster.h"
-using namespace std;
 
 default_random_engine dre;
 uniform_int_distribution<>uid('a', 'z');
@@ -14,7 +13,7 @@ MemoryMonster::MemoryMonster(int n) : num{ n }
 
 MemoryMonster::~MemoryMonster()
 {
-	cout << "¼Ò¸êÀÚ - " << this << endl;
+	//cout << "¼Ò¸êÀÚ - " << this << endl;
 	if (p)
 		delete[] p;
 }
@@ -52,6 +51,10 @@ void MemoryMonster::set(int n) {
 
 int MemoryMonster::get() const {
 	return num;
+}
+
+char* MemoryMonster::getP() const {
+	return p;
 }
 
 
