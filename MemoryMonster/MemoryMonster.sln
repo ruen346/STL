@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MemoryMonster", "MemoryMonster\MemoryMonster.vcxproj", "{5A06D8AD-217D-4CA6-B6A3-A58BC51BBB60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A06D8AD-217D-4CA6-B6A3-A58BC51BBB60}.Debug|x64.ActiveCfg = Debug|x64
+		{5A06D8AD-217D-4CA6-B6A3-A58BC51BBB60}.Debug|x64.Build.0 = Debug|x64
+		{5A06D8AD-217D-4CA6-B6A3-A58BC51BBB60}.Debug|x86.ActiveCfg = Debug|Win32
+		{5A06D8AD-217D-4CA6-B6A3-A58BC51BBB60}.Debug|x86.Build.0 = Debug|Win32
+		{5A06D8AD-217D-4CA6-B6A3-A58BC51BBB60}.Release|x64.ActiveCfg = Release|x64
+		{5A06D8AD-217D-4CA6-B6A3-A58BC51BBB60}.Release|x64.Build.0 = Release|x64
+		{5A06D8AD-217D-4CA6-B6A3-A58BC51BBB60}.Release|x86.ActiveCfg = Release|Win32
+		{5A06D8AD-217D-4CA6-B6A3-A58BC51BBB60}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E45DC4C-8277-427F-B25E-44664F877FA9}
+	EndGlobalSection
+EndGlobal
