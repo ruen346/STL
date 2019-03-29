@@ -13,7 +13,7 @@ MemoryMonster::MemoryMonster(int n) : num{ n }
 
 MemoryMonster::~MemoryMonster()
 {
-	//cout << "소멸자 - " << this << endl;
+	//std::cout << "소멸자 - " << this << endl;
 	if (p)
 		delete[] p;
 }
@@ -41,7 +41,12 @@ MemoryMonster::MemoryMonster(MemoryMonster&&other) : num{ other.num }
 	other.num = 0;
 }
 
-void MemoryMonster::set(int n) {
+void MemoryMonster::reset(int n) 
+{
+	// 이미 확보한 메모리는 해제한다
+	if (p != nullptr)
+		delete[] p;
+
 	num = n;
 	p = new char[num];
 
@@ -49,11 +54,13 @@ void MemoryMonster::set(int n) {
 		p[i] = uid(dre);
 }
 
-int MemoryMonster::get() const {
+int MemoryMonster::getNum() const 
+{
 	return num;
 }
 
-char* MemoryMonster::getP() const {
+char* MemoryMonster::getData() const 
+{
 	return p;
 }
 

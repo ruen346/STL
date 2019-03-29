@@ -1,0 +1,4 @@
+﻿  소스.cpp
+c:\users\구건모\desktop\개발\stl\memorymonster\memorymonster\save.h(29): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\time.h(476): note: 'ctime' 선언을 참조하십시오.
+  MemoryMonster.vcxproj -> C:\Users\구건모\Desktop\개발\STL\MemoryMonster\x64\Debug\MemoryMonster.exe

@@ -16,6 +16,10 @@ private:
 	char *p{ nullptr };
 
 public:
+	int getNum() const; //확보한 메모리 갯수를 알려준다
+	char* getData() const; // 확보한 메모리의 위치를 알린다
+
+	void reset(int n); // 기존 메모리를 버리고 n개 만큼 새 메모리를 확보한다
 
 	MemoryMonster() = default;
 
@@ -30,12 +34,6 @@ public:
 	MemoryMonster(MemoryMonster&&other);
 
 	MemoryMonster& operator=(MemoryMonster&& other);
-
-	void set(int n);
-
-	int get() const;
-
-	char* getP() const;
 
 	friend ostream& operator<<(ostream&, const MemoryMonster&);
 };

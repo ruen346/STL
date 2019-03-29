@@ -334,3 +334,307 @@ int main()
 
 	save("소스.cpp");
 }
+
+
+☆★☆★
+//get -> getNum
+//getP -> getData
+//set -> reset 
+
+============================
+ Fri Mar 29 10:51:41 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <iterator>
+// #include <initializer_list>
+#include <array>
+#include "MemoryMonster.h"
+#include "save.h"
+
+// 2장 순차 컨테이너 (sequence container)
+//   array
+// - vector
+//   deque
+//   list
+//   forward_list
+
+
+int main()
+{
+	save("소스.cpp");
+}
+
+============================
+ Fri Mar 29 11:08:21 2019
+============================
+
+#pragma once
+//---------------------------------------------------------
+// MemoryMonster.h
+//
+// 메모리를소모하는 MemotyMonster 클래스가 있다
+// 정수를 인자로 받아 그 숫자만큼 세이브 한다.
+//---------------------------------------------------------
+#include <random>
+using namespace std;
+
+
+
+class MemoryMonster {
+private:
+	int num{ 0 };
+	char *p{ nullptr };
+
+public:
+	int getNum() const; //확보한 메모리 갯수를 알려준다
+	char* getData() const; // 확보한 메모리의 위치를 알린다
+
+	void reset(int n); // 기존 메모리를 버리고 n개 만큼 새 메모리를 확보한다
+
+	MemoryMonster() = default;
+
+	MemoryMonster(int n);
+
+	~MemoryMonster();
+
+	MemoryMonster(const MemoryMonster& other);
+
+	MemoryMonster& operator=(const MemoryMonster& other);
+
+	MemoryMonster(MemoryMonster&&other);
+
+	MemoryMonster& operator=(MemoryMonster&& other);
+
+	friend ostream& operator<<(ostream&, const MemoryMonster&);
+};
+
+============================
+ Fri Mar 29 11:08:21 2019
+============================
+
+#include "MemoryMonster.h"
+
+default_random_engine dre;
+uniform_int_distribution<>uid('a', 'z');
+
+MemoryMonster::MemoryMonster(int n) : num{ n }
+{
+	p = new char[num];
+
+	for (int i = 0; i < num; ++i)
+		p[i] = uid(dre);
+}
+
+MemoryMonster::~MemoryMonster()
+{
+	//cout << "소멸자 - " << this << endl;
+	if (p)
+		delete[] p;
+}
+
+MemoryMonster& MemoryMonster::operator=(const MemoryMonster& other) {
+	if (this == &other)
+		return *this;
+
+	delete[] p;
+	p = new char[num];
+	memcpy(p, other.p, num);
+	return *this;
+}
+
+MemoryMonster::MemoryMonster(const MemoryMonster& other) : num(other.num)
+{
+	p = new char[num];
+	memcpy(p, other.p, num);
+}
+
+MemoryMonster::MemoryMonster(MemoryMonster&&other) : num{ other.num }
+{
+	p = other.p;
+	other.p = nullptr;
+	other.num = 0;
+}
+
+void MemoryMonster::reset(int n) 
+{
+	// 이미 확보한 메모리는 해제한다
+	if (p != nullptr)
+		delete[] p;
+
+	num = n;
+	p = new char[num];
+
+	for (int i = 0; i < num; ++i)
+		p[i] = uid(dre);
+}
+
+int MemoryMonster::getNum() const 
+{
+	return num;
+}
+
+char* MemoryMonster::getData() const 
+{
+	return p;
+}
+
+
+MemoryMonster& MemoryMonster::operator=(MemoryMonster&& other) {
+	delete[] p;
+	num = other.num;
+	p = other.p;
+	other.p = nullptr;
+	other.num = 0;
+
+	return other;
+}
+
+ostream& operator<<(ostream& os, const MemoryMonster& mm)
+{
+	for (int i = 0; i < mm.num; ++i)
+		os << mm.p[i];
+	return os;
+}
+
+============================
+ Fri Mar 29 11:08:21 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+
+int main()
+{
+	save("MemoryMonster.h");
+	save("MemoryMonster.cpp");
+	save("소스.cpp");
+}
+
+============================
+ Fri Mar 29 11:50:56 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+
+int main()
+{
+	vector<MemoryMonster> v;
+
+	cout << "현재 원소 갯수 - " << v.size() << endl;
+	cout << "담을 수 있는 갯수 - " << v.capacity() << endl;
+	cout << "확보한 메모리 위치(주소) - " << v.data() << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri Mar 29 12:09:52 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+uniform_int_distribution<> uid2(10, 70);
+default_random_engine dre2;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+// MemoryMonster 20개를 만들어 vector에 넣어라
+// 초기값은 uid(10,70)로 만들어라
+// vector를 .getNum() 오름차순으로 정렬하라
+// 결과를 화면 출력한다
+
+int main()
+{
+	//스스로 만들어봄
+	vector<MemoryMonster> v;
+
+	for(int i=0; i<20; i++)
+	{
+		v.push_back(uid2(dre2));
+
+		char* p = v[i].getData();
+		sort(p, p + v[i].getNum());
+
+		cout << v[i] << endl;
+	}
+	save("소스.cpp");
+}
+
+============================
+ Fri Mar 29 12:20:11 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+uniform_int_distribution<> uid2(10, 70);
+default_random_engine dre2;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+// MemoryMonster 20개를 만들어 vector에 넣어라
+// 초기값은 uid(10,70)로 만들어라
+// vector를 .getNum() 오름차순으로 정렬하라
+// 결과를 화면 출력한다
+
+int main()
+{
+	//교수님이 만듬
+	vector<MemoryMonster> v;
+	v.reserve(20); // 20개 예약함, <엄청 빨라져서 중요함!!!!☆★>
+
+	for(int i=0; i<20; ++i)
+		v.push_back(uid2(dre2));
+
+	sort(v.begin(), v.end(), 
+		[](const MemoryMonster& a, const MemoryMonster& b)
+		{return a.getNum() < b.getNum(); }
+	);
+
+	for (const MemoryMonster& a : v)
+		cout << a << endl;
+
+	save("소스.cpp");
+}

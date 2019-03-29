@@ -1,33 +1,40 @@
 #include <iostream>
-#include <string>
-#include <algorithm>
-#include <iterator>
-// #include <initializer_list>
-#include <array>
+#include <vector>
 #include "MemoryMonster.h"
 #include "save.h"
+using namespace std;
 
-// 2장 순차 컨테이너
-// - array
+uniform_int_distribution<> uid2(10, 70);
+default_random_engine dre2;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
 // - vector
-// - deque
-// - list
-// - forward_list
+//   deque
+//   list
+//   forward_list
 
+// MemoryMonster 20개를 만들어 vector에 넣어라
+// 초기값은 uid(10,70)로 만들어라
+// vector를 .getNum() 오름차순으로 정렬하라
+// 결과를 화면 출력한다
 
 int main()
 {
-	array<MemoryMonster, 5> a{10,3,30,7,20};
+	//교수님이 만듬
+	vector<MemoryMonster> v;
+	v.reserve(20); // 20개 예약함, <엄청 빨라져서 중요함!!!!☆★>
 
-	// a의 각 원소를 오름차순으로 정렬하라
+	for(int i=0; i<20; ++i)
+		v.push_back(uid2(dre2));
 
-	for (int i = 0; i < a.size(); i++)
-	{
-		char* p = a[i].getP();
-		sort(p, p + a[i].get());
+	sort(v.begin(), v.end(), 
+		[](const MemoryMonster& a, const MemoryMonster& b)
+		{return a.getNum() < b.getNum(); }
+	);
 
-		cout << a[i] << endl;
-	}
+	for (const MemoryMonster& a : v)
+		cout << a << endl;
 
 	save("소스.cpp");
 }
