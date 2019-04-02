@@ -638,3 +638,235 @@ int main()
 
 	save("소스.cpp");
 }
+
+============================
+ Tue Apr  2 14:15:02 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+uniform_int_distribution<> uid2(10, 70);
+default_random_engine dre2;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+// MemoryMonster 20개를 만들어 vector에 넣어라
+// 초기값은 uid(10,70)로 만들어라
+// vector를 .getNum() 오름차순으로 정렬하라
+// 결과를 화면 출력한다
+
+int main()
+{
+	vector<MemoryMonster> v;//v에 들어갈 애는 MemoryMonster.
+	v.reserve(20);//20개 잡을거라고 예약. 이거 안하면 만들고 값 옮기고 번거로움. v야 너 20개를 담을 수 있는 애가 되었으면 좋겠어.
+	// b 0
+	// c 20
+	// d MemoryMoster 20개 쭈루룩 있는 자리를 가리킴.
+
+	default_random_engine dre;
+	uniform_int_distribution<>uid(10, 70);
+
+	cout << "push_back 하기 전" << endl;
+	v.push_back(uid(dre));
+	cout << "push_back 끝" << endl;
+
+
+	//   for (int i = 0; i < 20; ++i) {
+	//      v.push_back(uid(dre));
+	//   }
+	//
+	//
+	//   sort(v.begin(), v.end(), [](const MemoryMonster& a, const MemoryMonster& b) {return a.getNum() < b.getNum(); });
+	//
+	//   /*for (auto i = v.begin(); i != v.end(); ++i) {
+	//      cout << *i << endl;
+	//   }
+	//*/
+	//   for (const MemoryMonster& a : v)
+	//      cout << a << endl;
+
+	save("소스.cpp");
+
+	cout << "main 끝나기 전" << endl;
+}
+
+============================
+ Tue Apr  2 14:39:46 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+int main()
+{
+	vector<MemoryMonster> v;
+	//v.reserve(20);
+
+	v.push_back(10);
+	v.push_back(20);
+
+	
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  2 14:42:53 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+int main()
+{
+	vector<MemoryMonster> v;
+	v.reserve(2);
+
+	v.push_back(10);
+	v.push_back(20);
+
+	
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  2 14:44:22 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+int main()
+{
+	vector<MemoryMonster> v;
+	v.reserve(2);
+
+	v.emplace_back(10);
+	v.emplace_back(20);
+
+	
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  2 15:08:15 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+
+#include <iterator>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+// 입력자료구조 - 키보드
+// 출력자료구조 - 화면
+
+// 키보드에서 string를 읽어 오름차순으로 정렬함여 출력하라.
+
+int main()
+{
+	vector<string> v{ istream_iterator<string>(cin), istream_iterator<string>() };
+
+	sort(v.begin(), v.end());
+	copy(v.begin(), v.end(), ostream_iterator<string>(cout, "\t"));
+
+	for (int i = 0; i < v.size(); ++i)
+		cout << v[i] << endl;
+
+	
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  2 15:16:22 2019
+============================
+
+#include <iostream>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+
+#include <iterator>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+// - vector
+//   deque
+//   list
+//   forward_list
+
+// 입력자료구조 - 키보드
+// 출력자료구조 - 화면
+
+// 키보드에서 string를 읽어 오름차순으로 정렬함여 출력하라.
+// 소스.cpp에서 char을 읽어 오름차순으로 정렬하여 출력하라.
+
+int main()
+{
+	ifstream in("소스.cpp");
+
+	vector<char> v{ istream_iterator<char>(in), istream_iterator<char>() };
+
+	sort(v.begin(), v.end());
+	copy(v.begin(), v.end(), ostream_iterator<char>(cout));
+
+	for (int i = 0; i < v.size(); ++i)
+		cout << v[i] << endl;
+
+	
+	save("소스.cpp");
+}
