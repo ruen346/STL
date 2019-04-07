@@ -6,32 +6,40 @@
 #include <iterator>
 #include <string>
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
 
-// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
-//   array : smart 배열, []를 완벽하게 대체한다
-// - vector
-//   deque
-//   list
-//   forward_list
-
-// 입력자료구조 - 키보드
-// 출력자료구조 - 화면
-
-// 키보드에서 string를 읽어 오름차순으로 정렬함여 출력하라.
-// 소스.cpp에서 char을 읽어 오름차순으로 정렬하여 출력하라.
-
+// 입력 : 소스.cpp
+// 출력 : 거꾸로소스.cpp
+// 변신 : 소스.cpp의 단어를 역순으로 기록한다
+// 공백(white space)까지 처라하려면 istreambuf_iterator, ostreambuf_iterator 사용
 int main()
 {
-	vector<char> v{ istream_iterator<char>(cin), istream_iterator<char>() };
+	ifstream in("소스.cpp");
 
-	copy(v.begin(), v.end(), ostream_iterator<char>(cout));
+	string a("abcdefg xyz");
+	copy(a.begin(), a.end(), ostreambuf_iterator<char>(cout));
+	cout << endl;
+	copy(a.rbegin(), a.rend(), ostreambuf_iterator<char>(cout));
 
-	for (int i = 0; i < v.size(); ++i)
-		cout << v[i] << endl;
+	vector<string> v{ istreambuf_iterator<string>(in), istreambuf_iterator<string>() };
+	/*
+	vector<char> v{istreambuf_iterator<char>(in), istreambuf_iterator<char>()};
+	auto p = remove_if(v.begin(), v.end(), [](const char c) 
+	{
+		if (c == 'e')
+			return true;
+		return false;
+	});
 
+	v.erase(p, v.end());
+	*/
 	
-	save("소스.cpp");
+	//ofstream out("거꾸로소스.cpp");
+	//copy(v.begin(), v.end(), ostreambuf_iterator<char>(out));
 
+	in.close();
+
+	//save("소스.cpp");
 }

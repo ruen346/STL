@@ -26,6 +26,8 @@ MemoryMonster::~MemoryMonster()
 }
 
 MemoryMonster& MemoryMonster::operator=(const MemoryMonster& other) {
+
+	std::cout << "복사할당" << std::endl;
 	if (this == &other)
 		return *this;
 
@@ -75,6 +77,7 @@ char* MemoryMonster::getData() const {
 }
 
 MemoryMonster& MemoryMonster::operator=(MemoryMonster&& other) {
+	std::cout << "이동할당" << std::endl;
 	delete[] p;
 	num = other.num;
 	p = other.p;
@@ -89,4 +92,11 @@ std::ostream& operator<<(std::ostream& os, const MemoryMonster& mm)
 	for (int i = 0; i < mm.num; ++i)
 		os << mm.p[i];
 	return os;
+}
+
+bool MemoryMonster::operator == (const MemoryMonster& rhs)
+{
+	if (num == rhs.num)
+		return true;
+	return false;
 }

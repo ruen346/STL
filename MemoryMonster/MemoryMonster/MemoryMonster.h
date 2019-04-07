@@ -36,4 +36,6 @@ public:
 	MemoryMonster& operator=(MemoryMonster&& other);
 
 	friend ostream& operator<<(ostream&, const MemoryMonster&);
+
+	bool operator == (const MemoryMonster& rhs);
 };
