@@ -980,7 +980,7 @@ using namespace std;
 int main()
 {
 	vector<MemoryMonster> v;
-	v.reserve(10);
+	v.reserve(10); // <- 이거안쓰면 복사되고 소멸되고 난리도아님 vector한정
 
 	v.emplace_back(10);
 	v.emplace_back(30);
@@ -1037,6 +1037,249 @@ int main()
 	copy(v.begin(), v.end(), ostreambuf_iterator<char>(out));
 
 	in.close();
+
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  9 13:41:34 2019
+============================
+
+#include <iostream>
+#include <deque>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector
+// - deque
+//   list
+//   forward_list
+
+// deque에 MemoryMonster {10, 20, 30)을 추가해보자
+// deque의 원소를 화면에 출력해보자
+
+int main()
+{
+	deque<MemoryMonster> d{10, 20, 30};
+	// 초기화 했을때 deque의 복사생성자 주소는 붙어있지 않다
+
+	for (int i = 0; i < d.size(); ++i)
+	{
+		cout << d[i] << endl;
+		// 벡터 d[0] + i
+		// 덱 d[0]->(100)d[i]---->>dkkkdkd
+	}
+
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  9 13:56:07 2019
+============================
+
+#include <iostream>
+#include <deque>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector
+// - deque
+//   list
+//   forward_list
+
+// deque에 MemoryMonster {10, 20, 30)을 추가해보자
+// deque의 원소를 화면에 출력해보자
+
+int main()
+{
+	deque<MemoryMonster> d;
+
+	// 10, 20, 30 추가
+	d.emplace_back(10);
+	d.emplace_back(20);
+	d.emplace_back(30);
+
+	for (int i = 0; i < d.size(); ++i)
+	{
+		cout << d[i] << endl;
+	}
+
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  9 14:12:50 2019
+============================
+
+#include <iostream>
+#include <deque>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <fstream>
+#include <iterator>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector
+// - deque
+//   list
+//   forward_list
+
+// 소스.cpp를 
+// deque에 저장하자
+// 뒤에서부터 화면 출력하라
+
+int main()
+{
+	ifstream in("소스.cpp");
+	deque<char> d{ istreambuf_iterator<char>(in), istreambuf_iterator<char>() };
+
+	for (auto i = d.rbegin(); i < d.rend(); ++i)
+		cout << *i;
+
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  9 14:15:28 2019
+============================
+
+#include <iostream>
+#include <deque>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <fstream>
+#include <iterator>
+#include <algorithm>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector
+// - deque
+//   list
+//   forward_list
+
+// 소스.cpp를 
+// deque에 저장하자
+// 뒤에서부터 화면 출력하라
+
+int main()
+{
+	ifstream in("소스.cpp");
+	deque<char> d{ istreambuf_iterator<char>(in), istreambuf_iterator<char>() };
+
+	// 이거 더잘 출력됨
+	copy(d.rbegin(), d.rend(), ostreambuf_iterator<char>(cout));
+	cout << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  9 14:50:33 2019
+============================
+
+#include <iostream>
+#include <deque>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <fstream>
+#include <iterator>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+	vector<string> s;
+	vector<char> c;
+
+	string str;
+	cin >> str;
+	s.push_back(str);
+
+	for (char d : s[0])
+		c.push_back(d);
+
+	for (int i = 0; i < c.size(); ++i)
+		cout << c[i] << ' ';
+
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  9 15:13:02 2019
+============================
+
+#include <iostream>
+#include <list>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector
+//   deque
+// - list
+//   forward_list
+
+// list에 MemoryMonster 3개를 추가해보세요
+// 각 원소를 출력해보세요
+
+int main()
+{
+	list<MemoryMonster> monsters;
+	auto p = monsters.begin();
+
+	p = monsters.emplace(p, 10);
+	p = monsters.emplace(p, 20);
+	p = monsters.emplace(p, 30);
+
+	for (auto i = monsters.begin(); i != monsters.end(); ++i)
+		cout << *i << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr  9 15:15:12 2019
+============================
+
+#include <iostream>
+#include <list>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector
+//   deque
+// - list
+//   forward_list
+
+// list에 MemoryMonster 3개를 추가해보세요
+// 각 원소를 출력해보세요
+
+int main()
+{
+	list<MemoryMonster> monsters;
+	auto p = monsters.begin();
+
+	p = monsters.emplace(p, 10);
+	p = monsters.emplace(p, 20);
+	p = monsters.emplace(p, 30);
+
+	for (MemoryMonster& mon : monsters)
+		cout << mon << endl;
 
 	save("소스.cpp");
 }

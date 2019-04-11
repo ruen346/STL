@@ -1,45 +1,28 @@
 #include <iostream>
-#include <vector>
+#include <list>
 #include "MemoryMonster.h"
 #include "save.h"
-
-#include <iterator>
-#include <string>
-#include <algorithm>
-#include <fstream>
-
 using namespace std;
 
-// 입력 : 소스.cpp
-// 출력 : 거꾸로소스.cpp
-// 변신 : 소스.cpp의 단어를 역순으로 기록한다
-// 공백(white space)까지 처라하려면 istreambuf_iterator, ostreambuf_iterator 사용
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector
+//   deque : double-ended queue, 덱
+// - list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// list에 MemoryMonster 3개를 추가해보세요
+// 각 원소를 출력해보세요
+
 int main()
 {
-	ifstream in("소스.cpp");
+	list<MemoryMonster> monsters{ 10, 20, 30, 3, 40, 50 };
 
-	string a("abcdefg xyz");
-	copy(a.begin(), a.end(), ostreambuf_iterator<char>(cout));
-	cout << endl;
-	copy(a.rbegin(), a.rend(), ostreambuf_iterator<char>(cout));
+	// 리스트에서 길이가 10보다 작은 원소를 제거하라.
+	monsters.remove_if();
 
-	vector<string> v{ istreambuf_iterator<string>(in), istreambuf_iterator<string>() };
-	/*
-	vector<char> v{istreambuf_iterator<char>(in), istreambuf_iterator<char>()};
-	auto p = remove_if(v.begin(), v.end(), [](const char c) 
-	{
-		if (c == 'e')
-			return true;
-		return false;
-	});
+	for (MemoryMonster& mon : monsters)
+		cout << mon << endl;
 
-	v.erase(p, v.end());
-	*/
-	
-	//ofstream out("거꾸로소스.cpp");
-	//copy(v.begin(), v.end(), ostreambuf_iterator<char>(out));
-
-	in.close();
-
-	//save("소스.cpp");
+	save("소스.cpp");
 }
