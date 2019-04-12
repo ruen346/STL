@@ -100,3 +100,10 @@ bool MemoryMonster::operator == (const MemoryMonster& rhs)
 		return true;
 	return false;
 }
+
+bool MemoryMonster::operator<(const MemoryMonster& rhs)
+{
+	if (num == rhs.num)
+		return true;
+	return false;
+}
