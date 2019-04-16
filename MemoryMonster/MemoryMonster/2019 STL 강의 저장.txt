@@ -1001,7 +1001,6 @@ int main()
 ============================
  Fri Apr  5 12:03:18 2019
 ============================
-//과제 참조
 
 #include <iostream>
 #include <vector>
@@ -1439,4 +1438,478 @@ int main()
 	cout << "-------------------------" << endl;
 
 	save("소스.cpp");
+}
+
+============================
+ Tue Apr 16 13:49:13 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+// - list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+void print(list<MemoryMonster>::iterator, list<MemoryMonster>::iterator);
+
+int main()
+{
+	list<MemoryMonster> monsters{ 10, 20, 30 };
+	
+	print(monsters.begin(), monsters.end()); // 화면에 원소를 출력한다
+	
+	save("소스.cpp");
+}
+
+void print(list<MemoryMonster>::iterator a, list<MemoryMonster>::iterator b)
+{
+
+	while (a != b)
+		cout << *a++ << endl;
+}
+
+============================
+ Tue Apr 16 13:55:54 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+#include <vector>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+// - list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+void print(list<MemoryMonster>::iterator, list<MemoryMonster>::iterator);
+void print(vector<MemoryMonster>::iterator, vector<MemoryMonster>::iterator);
+
+int main()
+{
+	vector<MemoryMonster> monsters{ 10, 20, 30 };
+	
+	print(monsters.begin(), monsters.end()); // 화면에 원소를 출력한다
+	
+	save("소스.cpp");
+}
+
+void print(list<MemoryMonster>::iterator a, list<MemoryMonster>::iterator b)
+{
+
+	while (a != b)
+		cout << *a++ << endl;
+}
+
+void print(vector<MemoryMonster>::iterator a, vector<MemoryMonster>::iterator b)
+{
+
+	while (a != b)
+		cout << *a++ << endl;
+}
+
+============================
+ Tue Apr 16 14:02:58 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+#include <vector>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+// - list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+template <class Iter>
+void print(Iter b, Iter e);
+
+int main()
+{
+	list<MemoryMonster> monsters{ 10, 20, 30 };
+	
+	print(monsters.begin(), monsters.end()); // 화면에 원소를 출력한다
+	
+	save("소스.cpp");
+}
+
+template <class Iter>
+void print(Iter beg, Iter end)
+{
+	while (beg != end)
+		cout << *beg++ << endl;
+}
+
+============================
+ Tue Apr 16 14:12:08 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+#include <vector>
+#include <string>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+// - list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+template <class Iter>
+void print(Iter b, Iter e);
+
+template <class T>
+T Add(T a, T b);
+
+int main()
+{
+	list<MemoryMonster> monsters{ 10, 20, 30 };
+	
+	print(monsters.begin(), monsters.end()); // 화면에 원소를 출력한다
+
+	cout << Add(1, 2) << endl;
+	cout << Add<string>("Hello", " World") << endl;
+	
+	save("소스.cpp");
+}
+
+template <class Iter>
+void print(Iter beg, Iter end)
+{
+	while (beg != end)
+		cout << *beg++ << endl;
+}
+
+template <class T>
+T Add(T a, T b)
+{
+	// Type_trait를 이용하면 전달된 T에 대한 추가정보를 알 수 있다
+	// cout << is_abstract<T>() << endl;
+	// cout << is_arithmetic<T>() << endl;
+
+	return a + b;
+}
+
+============================
+ Tue Apr 16 14:20:38 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+#include <algorithm>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+// - list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+template <class Iter>
+void x(Iter b, Iter e);
+
+int main()
+{
+	list<MemoryMonster> monsters{ 3, 1, 7, 9, 5 };
+	
+	x(monsters.begin(), monsters.end());
+
+	save("소스.cpp");
+}
+
+template <class Iter>
+void x(Iter b, Iter e)
+{
+	cout << typeid(iterator_traits<Iter>::iterator_category()).name() << endl;
+}
+
+============================
+ Tue Apr 16 14:37:06 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+#include <algorithm>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+// - list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+template <class Iter>
+void f(Iter i);
+
+int main()
+{
+	vector<int> v;
+
+	f(v.begin()); // 랜덤억세스
+
+	list<int> l;
+	f(l.begin()); // 양방향반복자
+
+	save("소스.cpp");
+}
+
+template <class Iter>
+void f(Iter i)
+{
+	cout << typeid(iterator_traits<Iter>::iterator_category).name() << endl;
+}
+
+============================
+ Tue Apr 16 14:39:52 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+#include <algorithm>
+#include <forward_list>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+//   list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+template <class Iter>
+void f(Iter i);
+
+int main()
+{
+	vector<int> v;
+	f(v.begin()); // 랜덤억세스
+
+	list<int> l;
+	f(l.begin()); // 양방향반복자
+
+	forward_list<int> fl;
+	f(fl.begin()); // 전진반복자
+
+	ostream_iterator<int> oi(cout);
+	f(oi); // 출력반복자
+
+	f(istream_iterator<int>()); // 입력반복자
+
+	// STL의 5개 반복자
+
+	save("소스.cpp");
+}
+
+template <class Iter>
+void f(Iter i)
+{
+	cout << typeid(iterator_traits<Iter>::iterator_category).name() << endl;
+}
+
+============================
+ Tue Apr 16 14:46:37 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+#include <algorithm>
+#include <forward_list>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+//   list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+template <class Iter>
+void f(Iter i);
+
+class MyIter : public iterator<input_iterator_tag, int, int*> // 사용자정의 반복자
+{
+
+};
+
+int main()
+{
+	vector<int> v;
+	f(v.begin()); // 랜덤억세스
+
+	list<int> l;
+	f(l.begin()); // 양방향반복자
+
+	forward_list<int> fl;
+	f(fl.begin()); // 전진반복자
+
+	ostream_iterator<int> oi(cout);
+	f(oi); // 출력반복자
+
+	f(istream_iterator<int>()); // 입력반복자
+
+	// STL의 5개 반복자
+
+
+	f(MyIter());
+
+	save("소스.cpp");
+}
+
+template <class Iter>
+void f(Iter i)
+{
+	cout << typeid(iterator_traits<Iter>::iterator_category).name() << endl;
+}
+
+============================
+ Tue Apr 16 14:49:22 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+//   list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+int main()
+{
+	vector<int> v{ 1, 2, 3, 4, 5 };
+	list<int> l;
+
+	copy(v.begin(), v.end(), ostream_iterator<int>(cout, "\n"));
+
+	save("소스.cpp");
+}
+
+============================
+ Tue Apr 16 14:59:17 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <list>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+//   list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+template<class Src, class Des>
+void myCopy(Src b, Src e, Des d);
+
+int main()
+{
+	vector<int> v{ 1, 2, 3, 4, 5 };
+	list<int> l;
+
+	myCopy(v.begin(), v.end(), ostream_iterator<int>(cout, "\n"));
+
+	save("소스.cpp");
+}
+
+template<class Src, class Des>
+void myCopy(Src b, Src e, Des d)
+{
+	while (b != e)
+		*d++ = *b++;
+}
+
+============================
+ Tue Apr 16 15:13:45 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <vector>
+#include <list>
+using namespace std;
+
+// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
+//   array : smart 배열, []를 완벽하게 대체한다
+//   vector : dynamic array (STL 간판선수)
+//   deque : double-ended queue, 덱
+//   list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
+//   forward_list
+
+// copy의 정체를 밝혀보자
+
+template<class Src, class Des>
+void myCopy(Src b, Src e, Des d);
+
+int main()
+{
+	vector<int> v{ 1, 2, 3, 4, 5 };
+	vector<int> w;
+
+	myCopy(v.begin(), v.end(), back_inserter(w));
+
+	save("소스.cpp");
+}
+
+template<class Src, class Des>
+void myCopy(Src b, Src e, Des d)
+{
+	while (b != e)
+		*d++ = *b++;
 }
