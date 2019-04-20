@@ -1,31 +1,38 @@
 #include <iostream>
 #include "MemoryMonster.h"
 #include "save.h"
-#include <vector>
-#include <list>
+#include <map>
 #include <string>
 #include <algorithm>
 #include <iterator>
+#include <fstream>
 using namespace std;
 
-// 2장 순차 컨테이너 (sequence container, (homogeneous data type만 담는다))
-//   array : smart 배열, []를 완벽하게 대체한다
-//   vector : dynamic array (STL 간판선수)
-//   deque : double-ended queue, 덱
-//   list : 이후 컨테이너는 원소보다 더 큰 메모리를 사용한다
-//   forward_list
+// Associative Container (연관 컨테이너)
+//	map - dirctionay <key, value> 쌍이 원소
+//	set - <key>가 원소
+//
+// Unordered Associative Contaiiner (순서없는 연관 컨테이너, Hash)
+//	Unordered_map
+//	Unordered_set
 
-// 키보드에서 단어를 읽어와 역순으로 출력하라
-// ex) 안녕 하세요 -> 하세요 안녕
+// 소스.cpp에 각 알파벳이 몇 번 사용되었나 출력하라
 
 int main()
 {
-	vector<string> v;
+	map<char, int> cb;
 
-	copy(istream_iterator<string>(cin), istream_iterator<string>(), back_inserter(v));
+	ifstream in("소스.cpp");
+	for (auto i = istream_iterator<char>(in); i != istream_iterator<char>(); ++i)
+	{
+		if(isalpha(*i))
+			cb[*i]++;
+	}
 
-	for (auto i = v.crbegin(); i < v.crend(); ++i)
-		cout << *i << endl;
+	// 출력
+	auto p = cb.cbegin();
+	for (int i = 0; i < cb.size(); ++i)
+		cout << "[" << p->first << "] ---> " << p->second << endl;
 
 	save("소스.cpp");
 }

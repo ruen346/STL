@@ -1913,3 +1913,262 @@ void myCopy(Src b, Src e, Des d)
 	while (b != e)
 		*d++ = *b++;
 }
+
+============================
+ Fri Apr 19 11:14:07 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <map>
+#include <string>
+using namespace std;
+
+// Associative Container (연관 컨테이너)
+//	map - dirctionay <key, value> 쌍이 원소
+//	set - <key>가 원소
+//
+// Unordered Associative Contaiiner (순서없는 연관 컨테이너, Hash)
+//	Unordered_map
+//	Unordered_set
+
+// 아이돌그룹의 이름과 멤버 수 
+
+int main()
+{
+	// pair 설명
+	pair<string, int> p{ "c++",17 };
+	cout << p.first << ", " << p.second << endl;
+
+
+	map<string, int> idols;
+
+	idols.insert(pair<string, int>("핑크레이디", 5)); // 2개를 하나처럼 페어 
+	idols.insert(make_pair("있지", 5)); // 위에꺼 쉽게 쓰기
+	idols.insert(make_pair("아이즈원", 12));
+	idols.insert(make_pair("워너원", 11));
+	idols.insert(make_pair("모모랜드", 9));
+	idols.insert(make_pair("블랙핑크", 4));
+	idols.insert(make_pair("트와이스", 9));
+	idols.insert(make_pair("세븐틴", 13));
+	idols.insert(make_pair("방탄소년단", 7));
+
+	save("소스.cpp");
+}
+
+============================
+ Fri Apr 19 11:19:49 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <map>
+#include <string>
+using namespace std;
+
+// Associative Container (연관 컨테이너)
+//	map - dirctionay <key, value> 쌍이 원소
+//	set - <key>가 원소
+//
+// Unordered Associative Contaiiner (순서없는 연관 컨테이너, Hash)
+//	Unordered_map
+//	Unordered_set
+
+// 아이돌그룹의 이름과 멤버 수 
+// map에 입력하고 출력해 보자
+
+int main()
+{
+	map<string, int> idols;
+
+	idols.insert(pair<string, int>("핑크레이디", 5)); // 2개를 하나처럼 페어 
+	idols.insert(make_pair("있지", 5)); // 위에꺼 쉽게 쓰기
+	idols.insert(make_pair("아이즈원", 12));
+	idols.insert(make_pair("워너원", 11));
+	idols.insert(make_pair("모모랜드", 9));
+	idols.insert(make_pair("블랙핑크", 4));
+	idols.insert(make_pair("트와이스", 9));
+	idols.insert(make_pair("세븐틴", 13));
+	idols.insert(make_pair("방탄소년단", 7));
+
+	for (auto i = idols.begin(); i != idols.end(); ++i)
+	{
+		cout << i->first << ", " << i->second << endl;
+	}
+
+	save("소스.cpp");
+}
+
+============================
+ Fri Apr 19 11:46:45 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <map>
+#include <string>
+using namespace std;
+
+// Associative Container (연관 컨테이너)
+//	map - dirctionay <key, value> 쌍이 원소
+//	set - <key>가 원소
+//
+// Unordered Associative Contaiiner (순서없는 연관 컨테이너, Hash)
+//	Unordered_map
+//	Unordered_set
+
+// 아이돌그룹의 이름과 멤버 수 
+// map에 입력하고 출력해 보자
+
+int main()
+{
+	map<string, int> idols;
+
+	idols.insert(pair<string, int>("핑크레이디", 5)); // 2개를 하나처럼 페어 
+	idols.insert(make_pair("있지", 5)); // 위에꺼 쉽게 쓰기
+	idols.insert(make_pair("아이즈원", 12));
+	idols.insert(make_pair("워너원", 11));
+	idols.insert(make_pair("모모랜드", 9));
+	idols.insert(make_pair("블랙핑크", 4));
+	idols.insert(make_pair("트와이스", 9));
+	idols.insert(make_pair("세븐틴", 13));
+	idols.insert(make_pair("방탄소년단", 7));
+
+	for (auto i = idols.begin(); i != idols.end(); ++i)
+	{
+		cout << (*i).first << ", " << i->second << endl;
+	}
+
+	// 맵은 원소를 빨리 찾기 ( O(log n) ) 위한 컨테이너이다
+	// 사용자가 원하는 그룹의 인원수를 출력하는 프로그램을 작성하라
+
+	string grop;
+
+	while(grop != "종료")
+	{
+		cout << "찾을 그룹을 입력하세요 : ";
+		cin >> grop;
+
+		auto p = idols.find(grop); // 못찾으면 마지막 위치가 리턴된다
+		if (p != idols.end())
+			cout << p->first << ",맴버 수는 " << p->second << "명 입니다" << endl;
+		else
+			cout << "없는 정보입니다" << endl;
+	}
+
+	save("소스.cpp");
+}
+
+============================
+ Fri Apr 19 12:00:37 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <map>
+#include <string>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+// Associative Container (연관 컨테이너)
+//	map - dirctionay <key, value> 쌍이 원소
+//	set - <key>가 원소
+//
+// Unordered Associative Contaiiner (순서없는 연관 컨테이너, Hash)
+//	Unordered_map
+//	Unordered_set
+
+// 아이돌그룹의 이름과 멤버 수 
+// map에 입력하고 출력해 보자
+
+namespace std
+{
+	ostream& operator<<(ostream& os, const pair<string, int> p)
+	{
+		os << p.first << ", " << p.second << endl;
+		return os;
+	}
+}
+
+int main()
+{
+	map<string, int> idols;
+
+	idols.insert(pair<string, int>("핑크레이디", 5)); // 2개를 하나처럼 페어 
+	idols.insert(make_pair("있지", 5)); // 위에꺼 쉽게 쓰기
+	idols.insert(make_pair("아이즈원", 12));
+	idols.insert(make_pair("워너원", 11));
+	idols.insert(make_pair("모모랜드", 9));
+	idols.insert(make_pair("블랙핑크", 4));
+	idols.insert(make_pair("트와이스", 9));
+	idols.insert(make_pair("세븐틴", 13));
+	idols.insert(make_pair("방탄소년단", 7));
+
+	for (auto i = idols.begin(); i != idols.end(); ++i)
+	{
+		cout << (*i).first << ", " << i->second << endl;
+	}
+
+	// 맵은 원소를 빨리 찾기 ( O(log n) ) 위한 컨테이너이다
+	// 사용자가 원하는 그룹의 인원수를 출력하는 프로그램을 작성하라
+
+	for (const pair<string, int>&d : idols)
+		cout << d.first << ", " << d.second << endl;
+
+	// copy로 맵을 출력하자
+
+	copy(idols.begin(), idols.end(), ostream_iterator<const pair<string, int>&>(cout));
+
+	save("소스.cpp");
+}
+
+============================
+ Fri Apr 19 12:06:56 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <map>
+#include <string>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+// Associative Container (연관 컨테이너)
+//	map - dirctionay <key, value> 쌍이 원소
+//	set - <key>가 원소
+//
+// Unordered Associative Contaiiner (순서없는 연관 컨테이너, Hash)
+//	Unordered_map
+//	Unordered_set
+
+// 아이돌그룹의 이름과 멤버 수 
+// map에 입력하고 출력해 보자
+
+int main()
+{
+	map<string, int> idols;
+
+	idols.insert(pair<string, int>("핑크레이디", 5)); // 2개를 하나처럼 페어 
+	idols.insert(make_pair("있지", 5)); // 위에꺼 쉽게 쓰기
+	idols.insert(make_pair("아이즈원", 12));
+	idols.insert(make_pair("워너원", 11));
+	idols.insert(make_pair("모모랜드", 9));
+	idols.insert(make_pair("블랙핑크", 4));
+	idols.insert(make_pair("트와이스", 9));
+	idols.insert(make_pair("세븐틴", 13));
+	idols.insert(make_pair("방탄소년단", 7));
+
+	// 벨류 = idols[키];
+	cout << idols["방탄소년단"] << endl; // associative array 처럼 사용 가능
+	idols["방탄소녀단"] = 10; // 새로생성
+	idols["방탄소년단"] = 10; // 원소변경
+
+	save("소스.cpp");
+}
