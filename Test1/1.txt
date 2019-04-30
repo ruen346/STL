@@ -1,0 +1,1 @@
+vector<Gamer> v{istream_iterator<Gamer>(in), istream_iterator<Gamer>()};

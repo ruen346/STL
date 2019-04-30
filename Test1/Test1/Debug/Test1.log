@@ -1,0 +1,4 @@
+﻿  소스.cpp
+c:\users\구건모\desktop\개발\stl\test1\test1\소스.cpp(93): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\stl\test1\test1\소스.cpp(103): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Test1.vcxproj -> C:\Users\구건모\Desktop\개발\STL\Test1\Debug\Test1.exe

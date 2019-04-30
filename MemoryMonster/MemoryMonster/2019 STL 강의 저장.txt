@@ -2172,3 +2172,69 @@ int main()
 
 	save("소스.cpp");
 }
+
+============================
+ Tue Apr 23 14:10:42 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <map>
+#include <string>
+#include <algorithm>
+#include <iterator>
+#include <fstream>
+using namespace std;
+
+// Allice in wornderland 를 다운로드 해 주세요.
+// 각 단어의 사용 횟수를 알고 싶다.
+// 특정 단어를 입력하면 몇 번 사용되었는가 출력한다.
+// 단어가 없으면 없다고 출력하자.
+
+int main()
+{
+	string fname("앨리스.txt");
+
+	ifstream in(fname);
+
+	istream_iterator<string> beg{ in };
+	istream_iterator<string> end{};
+
+	map<string, int> words;
+
+	string str;
+	int cnt{};
+
+	while (beg != end)
+	{
+		str = *beg++;
+		cout << str << " ";
+		cnt++;
+		words[str]++; // 맵에 str 추가
+	}
+
+	// 맵을 출력
+	for (const pair<string, int>& d : words)
+	{
+		cout << "[" << d.first << " ---> " << d.second << endl;
+	}
+
+	// 맵을 가장 많이 사용된 순서대로 출력
+	multimap<int, string> isMap; // multimap과 map의 차이는 키값의 중복허용 차이이다
+
+	for (const auto& d : words)
+		isMap.insert(make_pair(d.second, d.first));
+
+	cout << endl << "/////////////////////////////////////" << endl;
+
+	for(const pair<int, string>& d: isMap)
+		cout << "[" << d.second << " ---> " << d.first << endl;
+
+
+	cout << endl << endl;
+	cout << "단어의 수 : " << cnt << endl;
+	cout << "중복 제외 단어의 수 : " << words.size() << endl;
+
+	save("소스.cpp");
+}

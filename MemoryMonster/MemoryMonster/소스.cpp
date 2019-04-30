@@ -1,38 +1,22 @@
 #include <iostream>
-#include "MemoryMonster.h"
-#include "save.h"
-#include <map>
 #include <string>
 #include <algorithm>
 #include <iterator>
-#include <fstream>
-using namespace std;
+// #include <initializer_list>
+#include <array>
+#include "MemoryMonster.h"
+#include "save.h"
 
-// Associative Container (연관 컨테이너)
-//	map - dirctionay <key, value> 쌍이 원소
-//	set - <key>가 원소
-//
-// Unordered Associative Contaiiner (순서없는 연관 컨테이너, Hash)
-//	Unordered_map
-//	Unordered_set
+// 62p 1번문제
+// std::string 객체로 된 배열을 정의하고, 자신이 선택한 단어들로 초기화한 후
+// 반복자를 사용해 배열의 내용을 한 줄에 하나씩 출력하는 프로그램을 작성하라
 
-// 소스.cpp에 각 알파벳이 몇 번 사용되었나 출력하라
 
 int main()
 {
-	map<char, int> cb;
+	array<MemoryMonster, 5> a{ 10,3,30,7,20 };
 
-	ifstream in("소스.cpp");
-	for (auto i = istream_iterator<char>(in); i != istream_iterator<char>(); ++i)
-	{
-		if(isalpha(*i))
-			cb[*i]++;
-	}
+	// a의 각 원소를 오름차순으로 정렬하라
 
-	// 출력
-	auto p = cb.cbegin();
-	for (int i = 0; i < cb.size(); ++i)
-		cout << "[" << p->first << "] ---> " << p->second << endl;
-
-	save("소스.cpp");
+	cout << a[0];
 }
