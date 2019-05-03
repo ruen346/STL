@@ -1,22 +1,30 @@
 #include <iostream>
+#include <set>
 #include <string>
-#include <algorithm>
-#include <iterator>
-// #include <initializer_list>
-#include <array>
+#include <map>
+#include <vector>
 #include "MemoryMonster.h"
 #include "save.h"
 
-// 62p 1번문제
-// std::string 객체로 된 배열을 정의하고, 자신이 선택한 단어들로 초기화한 후
-// 반복자를 사용해 배열의 내용을 한 줄에 하나씩 출력하는 프로그램을 작성하라
-
-
 int main()
 {
-	array<MemoryMonster, 5> a{ 10,3,30,7,20 };
+	// 앨리스.txt의 모든 단어를 multiset에 읽어라.
 
-	// a의 각 원소를 오름차순으로 정렬하라
+	ifstream in("앨리스.txt");
 
-	cout << a[0];
+	multiset<string> words{ istream_iterator<string> { in } ,istream_iterator<string> {} };
+	cout << words.size();
+
+	multimap<int, string, greater<int>> mm;
+
+	for (auto i = words.begin(); i != words.end(); i = words.upper_bound(*i))
+		mm.emplace(words.count(*i), *i);
+
+
+	// 갯수가 가장 많은 단어부터 20개를 출력해 보라
+	auto p = mm.begin();;
+	for (int i = 0; i < 20; ++i, ++p)
+		cout << p->second << " ---> " << p->first << endl;
+
+	save("소스.cpp");
 }

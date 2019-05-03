@@ -101,7 +101,7 @@ bool MemoryMonster::operator == (const MemoryMonster& rhs)
 	return false;
 }
 
-bool MemoryMonster::operator<(const MemoryMonster& rhs)
+bool MemoryMonster::operator<(const MemoryMonster& rhs) const
 {
 	if (num == rhs.num)
 		return true;

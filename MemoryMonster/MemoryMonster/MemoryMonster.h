@@ -39,5 +39,5 @@ public:
 
 	bool operator == (const MemoryMonster& rhs);
 
-	bool operator<(const MemoryMonster& rhs);
+	bool operator<(const MemoryMonster& rhs) const;
 };

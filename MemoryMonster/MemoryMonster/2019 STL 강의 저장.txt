@@ -2238,3 +2238,352 @@ int main()
 
 	save("소스.cpp");
 }
+
+============================
+ Fri May  3 10:42:13 2019
+============================
+
+#include <iostream>
+#include <set>
+#include "MemoryMonster.h"
+#include "save.h"
+
+// set에 정수를 몇 개 넣어 보고 관찰해 보자
+
+int main()
+{
+	set<int> s{ 2,4,6,8,10,1,3,5,7,9 };
+
+	// s의 원소를 화면에 출력해 보자
+	for (int d : s)
+		cout << d << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 10:44:21 2019
+============================
+
+#include <iostream>
+#include <set>
+#include "MemoryMonster.h"
+#include "save.h"
+
+// set에 정수를 몇 개 넣어 보고 관찰해 보자
+
+int main()
+{
+	set<int> s{ 2,4,6,8,10,1,3,5,7,9 };
+
+	// s의 원소에 반복자를 사용하여 접근하자
+	// 값을 화면에 출력해 보자
+	for (auto i = s.begin(); i != s.end(); ++i)
+		cout << *i << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 11:04:38 2019
+============================
+
+#include <iostream>
+#include <set>
+#include "MemoryMonster.h"
+#include "save.h"
+
+// set에 정수를 몇 개 넣어 보고 관찰해 보자
+
+struct X
+{
+	bool operator()(int a, int b)
+	{
+		return a < b;
+	}
+};
+
+int main()
+{
+	// s를 오름차순으로 정렬하라
+	// 정렬 형식은 X로 하여 만들어라
+
+	set<int, X> s{ 2,4,6,8,10,1,3,5,7,9 };
+
+	for (auto& d : s)
+		cout << d << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 11:10:00 2019
+============================
+
+#include <iostream>
+#include <set>
+#include "MemoryMonster.h"
+#include "save.h"
+
+// set에 정수를 몇 개 넣어 보고 관찰해 보자
+
+template <> // 특수화
+struct less<int>
+{
+	bool operator()(int a, int b)
+	{
+		return a > b;
+	}
+};
+
+int main()
+{
+	// main()을 변경하지 않고 s를 내림차순으로 정렬하라
+
+	set<int> s{ 2,4,6,8,10,1,3,5,7,9 };
+
+	for (auto& d : s)
+		cout << d << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 11:32:37 2019
+============================
+
+#include <iostream>
+#include <set>
+#include "MemoryMonster.h"
+#include "save.h"
+
+// set에 정수를 몇 개 넣어 보고 관찰해 보자
+
+template <>
+struct less<MemoryMonster>
+{
+	bool operator()(const MemoryMonster& a, const MemoryMonster& b)
+	{
+		return a.getNum() < b.getNum();
+	}
+};
+
+int main()
+{
+	// s가 글자의 길이 기준으로 오름차순 정렬하도록 하라
+	set<MemoryMonster> s{ 2,4,6,8,10,1,3,5,7,9 };
+
+	for (auto& d : s)
+		cout << d << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 11:49:26 2019
+============================
+
+#include <iostream>
+#include <set>
+#include <string>
+#include "MemoryMonster.h"
+#include "save.h"
+
+// set에 정수를 몇 개 넣어 보고 관찰해 보자
+
+class Dog
+{
+	string name;
+
+public :
+	Dog(string name) : name{ name } {}
+
+	operator string() const
+	{
+		return name;
+	}
+
+	bool operator<(const Dog& rhs) const
+	{
+		return name < rhs.name;
+	}
+};
+
+int main()
+{
+	set<Dog> s{ string("댕댕이"), string("나비"), string("야옹이"), string("바둑이"), string("나비") };
+
+	for (const Dog& d : s)
+		cout << (string)(d) << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 11:52:27 2019
+============================
+
+#include <iostream>
+#include <set>
+#include <string>
+#include "MemoryMonster.h"
+#include "save.h"
+
+// set에 정수를 몇 개 넣어 보고 관찰해 보자
+
+class Dog
+{
+	string name;
+
+public :
+	Dog(string name) : name{ name } {}
+
+	operator string() const
+	{
+		return name;
+	}
+
+	bool operator<(const Dog& rhs) const
+	{
+		return name < rhs.name;
+	}
+
+	friend ostream& operator<<(ostream& os, const Dog& d)
+	{
+		os << d.name;
+		return os;
+	}
+};
+
+int main()
+{
+	multiset<Dog> s{ string("댕댕이"), string("나비"), string("야옹이"), string("바둑이"), string("나비") };
+
+	for (const Dog& d : s)
+		cout << d << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 12:00:26 2019
+============================
+
+#include <iostream>
+#include <set>
+#include <string>
+#include "MemoryMonster.h"
+#include "save.h"
+
+int main()
+{
+	// 앨리스.txt의 모든 단어를 multiset에 읽어라.
+
+	ifstream in("앨리스.txt");
+
+	multiset<string> words{ istream_iterator<string> { in } ,istream_iterator<string> {} };
+	cout << words.size();
+
+	auto p = words.begin();
+	advance(p, 10000);
+
+	for (int i = 0; i < 100; ++i)
+		cout << *p++ << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 12:12:48 2019
+============================
+
+#include <iostream>
+#include <set>
+#include <string>
+#include "MemoryMonster.h"
+#include "save.h"
+
+int main()
+{
+	// 앨리스.txt의 모든 단어를 multiset에 읽어라.
+
+	ifstream in("앨리스.txt");
+
+	multiset<string> words{ istream_iterator<string> { in } ,istream_iterator<string> {} };
+	cout << words.size();
+
+	// 단어의 갯수를 출력하라
+	for (auto i = words.begin(); i != words.end(); i = words.upper_bound(*i))
+		cout << "[" << *i << "] ---> " << words.count(*i) << endl;
+
+	// 갯수가 가장 많은 단어부터 20개를 출력해 보라
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 12:15:52 2019
+============================
+
+#include <iostream>
+#include <set>
+#include <string>
+#include "MemoryMonster.h"
+#include "save.h"
+
+int main()
+{
+	// 앨리스.txt의 모든 단어를 multiset에 읽어라.
+
+	ifstream in("앨리스.txt");
+
+	multiset<string> words{ istream_iterator<string> { in } ,istream_iterator<string> {} };
+	cout << words.size();
+
+	// 단어의 갯수를 출력하라
+	vector< pair<string, int>> v;
+
+	for (auto i = words.begin(); i != words.end(); i = words.upper_bound(*i))
+		v.emplace_back(*i, words.count(*i));
+
+	sort(v.begin(), v.end()); // 정렬
+
+	// 갯수가 가장 많은 단어부터 20개를 출력해 보라
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May  3 12:21:59 2019
+============================
+
+#include <iostream>
+#include <set>
+#include <string>
+#include <map>
+#include <vector>
+#include "MemoryMonster.h"
+#include "save.h"
+
+int main()
+{
+	// 앨리스.txt의 모든 단어를 multiset에 읽어라.
+
+	ifstream in("앨리스.txt");
+
+	multiset<string> words{ istream_iterator<string> { in } ,istream_iterator<string> {} };
+	cout << words.size();
+
+	multimap<int, string, greater<int>> mm;
+
+	for (auto i = words.begin(); i != words.end(); i = words.upper_bound(*i))
+		mm.emplace(words.count(*i), *i);
+
+
+	// 갯수가 가장 많은 단어부터 20개를 출력해 보라
+	auto p = mm.begin();;
+	for (int i = 0; i < 20; ++i, ++p)
+		cout << p->second << " ---> " << p->first << endl;
+
+	save("소스.cpp");
+}
