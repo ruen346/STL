@@ -1,30 +1,51 @@
 #include <iostream>
-#include <set>
 #include <string>
-#include <map>
-#include <vector>
+#include <unordered_map>
 #include "MemoryMonster.h"
 #include "save.h"
 
+class Dog {
+	string name;
+public:
+	Dog(string name) : name{ name } {}
+
+	string getName() const { return name; }
+	
+	bool operator == (const Dog& other) const
+	{
+		return name == other.name;
+	}
+};
+
+template <>
+struct hash<Dog>
+{
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
 int main()
 {
-	// 앨리스.txt의 모든 단어를 multiset에 읽어라.
+	unordered_map<Dog, int> dogs;
 
-	ifstream in("앨리스.txt");
+	dogs.emplace("코코", 3);
+	dogs.emplace("초코", 1);
+	dogs.emplace("별이", 5);
 
-	multiset<string> words{ istream_iterator<string> { in } ,istream_iterator<string> {} };
-	cout << words.size();
+	for (int i = 0; i < dogs.bucket_count(); ++i)
+	{
+		cout << "[" << i << "] --- ";
+		if (dogs.bucket_size(i))
+		{
+			for (auto b = dogs.begin(i); b != dogs.end(i); ++b)
+				cout << b->second << " ";
+		}
+		cout << endl;
+	}
 
-	multimap<int, string, greater<int>> mm;
-
-	for (auto i = words.begin(); i != words.end(); i = words.upper_bound(*i))
-		mm.emplace(words.count(*i), *i);
-
-
-	// 갯수가 가장 많은 단어부터 20개를 출력해 보라
-	auto p = mm.begin();;
-	for (int i = 0; i < 20; ++i, ++p)
-		cout << p->second << " ---> " << p->first << endl;
+	cout << dogs[string("코코")] << endl;
 
 	save("소스.cpp");
 }

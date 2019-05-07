@@ -2239,6 +2239,25 @@ int main()
 	save("소스.cpp");
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ============================
  Fri May  3 10:42:13 2019
 ============================
@@ -2584,6 +2603,231 @@ int main()
 	auto p = mm.begin();;
 	for (int i = 0; i < 20; ++i, ++p)
 		cout << p->second << " ---> " << p->first << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Tue May  7 13:40:01 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+
+int main()
+{
+	unordered_map<string, string> pBook;
+
+	pBook.insert(make_pair("경찰서", "112"));
+	pBook.insert(pair<string, string> ("소방서", "119"));
+	pBook.emplace("번호안내", "114");
+
+	for (auto a : pBook)
+		cout << a.first << " " << a.second << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Tue May  7 13:42:46 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+
+int main()
+{
+	unordered_map<string, string> pBook; // <- map이랑 다른거 없음
+	pBook.insert(make_pair("경찰서", "112"));
+	pBook.insert(pair<string, string> ("소방서", "119"));
+	pBook.emplace("번호안내", "114");
+
+	for (const pair<string, string>&a : pBook)
+		cout << a.first << " " << a.second << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Tue May  7 14:09:08 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+
+int main()
+{
+	unordered_map<string, string> pBook;
+
+	pBook.insert(make_pair("경찰서", "112"));
+	pBook.insert(pair<string, string> ("소방서", "119"));
+	pBook.emplace("번호안내", "114");
+	pBook["국정원"] = "111";
+
+	for (int i = 0; i < pBook.size(); ++i)
+	{
+		cout << "[" << i << "] --- ";
+		if (pBook.bucket_size(i))
+		{
+			for (auto b = pBook.begin(i); b != pBook.end(i); ++b)
+				cout << b->second << " ";
+		}
+		cout << endl;
+	}
+
+	save("소스.cpp");
+}
+
+============================
+ Tue May  7 14:52:17 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+
+class X {
+public:
+	size_t operator()(const MemoryMonster& a) const
+	{
+		return hash<string>()(a.getData());
+	}
+};
+
+int main()
+{
+	unordered_multimap<MemoryMonster, int, X> pBook;
+
+	pBook.emplace(10, 10);
+
+	for (int i = 0; i < pBook.bucket_count(); ++i)
+	{
+		cout << "[" << i << "] --- ";
+		if (pBook.bucket_size(i))
+		{
+			for (auto b = pBook.begin(i); b != pBook.end(i); ++b)
+				cout << b->second << " ";
+		}
+		cout << endl;
+	}
+
+	save("소스.cpp");
+}
+
+============================
+ Tue May  7 15:12:28 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+
+class Dog {
+	string name;
+public:
+	string getName() const { return name; }
+	bool operator == (const Dog& other) const
+	{
+		return name == other.name;
+	}
+};
+
+template <>
+struct hash<Dog>
+{
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
+int main()
+{
+	unordered_multimap<Dog, int> dogs;
+
+	dogs.emplace("코코", 3);
+	dogs.emplace("초코", 1);
+	dogs.emplace("별이", 5);
+
+	for (int i = 0; i < dogs.bucket_count(); ++i)
+	{
+		cout << "[" << i << "] --- ";
+		if (dogs.bucket_size(i))
+		{
+			for (auto b = dogs.begin(i); b != dogs.end(i); ++b)
+				cout << b->second << " ";
+		}
+		cout << endl;
+	}
+
+	//save("소스.cpp");
+}
+
+============================
+ Tue May  7 15:18:23 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+
+class Dog {
+	string name;
+public:
+	Dog(string name) : name{ name } {}
+
+	string getName() const { return name; }
+	
+	bool operator == (const Dog& other) const
+	{
+		return name == other.name;
+	}
+};
+
+template <>
+struct hash<Dog>
+{
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
+int main()
+{
+	unordered_map<Dog, int> dogs;
+
+	dogs.emplace("코코", 3);
+	dogs.emplace("초코", 1);
+	dogs.emplace("별이", 5);
+
+	for (int i = 0; i < dogs.bucket_count(); ++i)
+	{
+		cout << "[" << i << "] --- ";
+		if (dogs.bucket_size(i))
+		{
+			for (auto b = dogs.begin(i); b != dogs.end(i); ++b)
+				cout << b->second << " ";
+		}
+		cout << endl;
+	}
+
+	cout << dogs[string("코코")] << endl;
 
 	save("소스.cpp");
 }

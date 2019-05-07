@@ -1,5 +1,6 @@
 #include "MemoryMonster.h"
 #include <random>
+#include <string>
 #include <iostream>
 
 std::default_random_engine dre;
@@ -94,9 +95,9 @@ std::ostream& operator<<(std::ostream& os, const MemoryMonster& mm)
 	return os;
 }
 
-bool MemoryMonster::operator == (const MemoryMonster& rhs)
+bool MemoryMonster::operator == (const MemoryMonster& rhs) const
 {
-	if (num == rhs.num)
+	if (std::string(p) == std::string(rhs.p))
 		return true;
 	return false;
 }
