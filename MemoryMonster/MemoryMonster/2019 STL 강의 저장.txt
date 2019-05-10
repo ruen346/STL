@@ -2831,3 +2831,438 @@ int main()
 
 	save("소스.cpp");
 }
+
+============================
+ Fri May 10 10:41:38 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <vector>
+#include <initializer_list>
+
+class Dog {
+	string name;
+public:
+	Dog(string name) : name{ name } {}
+
+	string getName() const { return name; }
+	
+	bool operator == (const Dog& other) const
+	{
+		return name == other.name;
+	}
+};
+
+template <>
+struct hash<Dog>
+{
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
+int main()
+{
+	initializer_list<string> names{ "코코","별이","콩이" };
+	vector<Dog> v{names.begin(), names.end()};
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May 10 10:46:39 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <vector>
+#include <initializer_list>
+
+class Dog {
+	string name;
+public:
+	Dog(string name) : name{ name } {}
+
+	string getName() const { return name; }
+	
+	bool operator == (const Dog& other) const
+	{
+		return name == other.name;
+	}
+};
+
+template <>
+struct hash<Dog>
+{
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
+int main()
+{
+	vector<Dog> v{ string("코코"),string("별이"),string("콩이") };
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May 10 10:59:23 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <vector>
+#include <initializer_list>
+
+class Dog {
+	string name;
+public:
+	Dog(string name) : name{ name } {}
+
+	string getName() const { return name; }
+	
+	bool operator == (const Dog& other) const
+	{
+		return name == other.name;
+	}
+};
+
+template <>
+struct hash<Dog>
+{
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
+int main()
+{
+	vector<Dog> v{ string("코코"),string("별이"),string("콩이") };
+
+	// "해피"라는 이름의 개가 vector v 에 있는 지 찾아보라
+
+	auto p = find(v.begin(), v.end(), Dog("해피"));
+	if (p != v.end())
+		cout << "찾음" << endl;
+	else
+		cout << "못찾음" << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May 10 11:11:59 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <vector>
+#include <initializer_list>
+#include <algorithm>
+
+class Dog {
+	string name;
+public:
+	Dog(string name) : name{ name } {}
+
+	string getName() const { return name; }
+	
+	bool operator == (const Dog& other) const
+	{
+		return name == other.name;
+	}
+};
+
+template <>
+struct hash<Dog>
+{
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
+struct DogHash {
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
+int main()
+{
+	// 이번엔 unordered_map 일때 찾기
+
+	unordered_map<Dog, int, DogHash> m;
+	m.emplace("코코", 1);
+	m.emplace("별이", 2);
+	m.emplace("콩이", 3);
+
+	// "해피"라는 이름의 개가 있는 지 찾아보라
+
+	auto p = m.find(Dog("해피"));
+	if (p != m.end())
+		cout << "찾음" << endl;
+	else
+		cout << "못찾음" << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May 10 11:15:01 2019
+============================
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <vector>
+#include <initializer_list>
+#include <algorithm>
+
+class Dog {
+	string name;
+public:
+	Dog(string name) : name{ name } {}
+
+	string getName() const { return name; }
+	
+	bool operator == (const Dog& other) const
+	{
+		return name == other.name;
+	}
+};
+
+template <>
+struct hash<Dog>
+{
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
+struct DogHash {
+	int operator()(const Dog& d) const
+	{
+		return hash<string>()(d.getName());
+	}
+};
+
+int main()
+{
+	// 이번엔 unordered_map 일때 찾기
+
+	unordered_map<Dog, int, DogHash> m;
+	m.emplace("코코", 1);
+	m.emplace("별이", 2);
+	m.emplace("콩이", 3);
+
+	// "해피"라는 이름의 개가 있는 지 찾아보라
+
+	auto p = m[Dog("해피")];
+	cout << p << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May 10 11:36:17 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+#include <map>
+#include <algorithm>
+
+// 정수 1000만개를 unorderde_map과 map에 저장한다
+// 임의의 정수 100만개가 컨테이너에 있는 지 찾아본다
+// 각각 걸리는 시간을 측정한다
+
+int main()
+{
+	// 정수 1000만개를 map에 넣는다.
+	map<int, int> m;
+
+	default_random_engine dre;
+	uniform_int_distribution<> uid;
+
+	for (int i = 0; i < 1000'0000; ++i)
+		m.emplace(uid(dre), i);
+
+	cout << "맵 생성" << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May 10 12:02:42 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+#include <map>
+#include <algorithm>
+#include <unordered_map>
+#include <chrono>
+#include <random>
+using namespace std::chrono;
+
+// 정수 1000만개를 unorderde_map과 map에 저장한다
+// 임의의 정수 100만개가 컨테이너에 있는 지 찾아본다
+// 각각 걸리는 시간을 측정한다
+
+int main()
+{
+	// 정수 1000만개를 map에 넣는다.
+	map<int, int> m;
+
+	default_random_engine dre;
+	uniform_int_distribution<> uid;
+
+	int i{};
+	while( m.size() != 1000'0000)
+		m.emplace(uid(dre), ++i);
+
+	cout << "map 생성" << m.size() << endl;
+
+	// map의 원소를 그대로 unordered_map에 넣는다
+
+	unordered_map<int, int> um{ m.begin(), m.end() };
+	cout << "unordered map 생성" << um.size() << endl;
+
+	{
+		cout << "임의의 정수 100만개를 map에서 찾아보자" << endl;
+		cout << "찾기 시작" << endl;
+
+		auto b = steady_clock::now();
+
+		for (int i = 0; i < 100'0000; ++i)
+			m.find(uid(dre));
+
+		auto d = duration_cast<milliseconds>(steady_clock::now() - b).count();
+
+		cout << "걸린 시간은 - " << d << endl;
+	}
+
+	{
+		cout << "임의의 정수 100만개를 unordered map에서 찾아보자" << endl;
+		cout << "찾기 시작" << endl;
+
+		auto b = steady_clock::now();
+
+		for (int i = 0; i < 100'0000; ++i)
+			um.find(uid(dre));
+
+		auto d = duration_cast<milliseconds>(steady_clock::now() - b).count();
+
+		cout << "걸린 시간은 - " << d << endl;
+	}
+
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May 10 12:06:36 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+#include <map>
+#include <algorithm>
+#include <unordered_map>
+#include <chrono>
+#include <random>
+#include <vector>
+using namespace std::chrono;
+
+// 정수 1000만개를 unorderde_map과 map에 저장한다
+// 임의의 정수 100만개가 컨테이너에 있는 지 찾아본다
+// 각각 걸리는 시간을 측정한다
+
+int main()
+{
+	// 정수 1000만개를 map에 넣는다.
+	map<int, int> m;
+
+	default_random_engine dre;
+	uniform_int_distribution<> uid;
+
+	int i{};
+	while( m.size() != 1000'0000)
+		m.emplace(uid(dre), ++i);
+
+	cout << "map 생성" << m.size() << endl;
+
+	// map의 원소를 그대로 unordered_map에 넣는다
+
+	unordered_map<int, int> um{ m.begin(), m.end() };
+	cout << "unordered map 생성" << um.size() << endl;
+
+	// 찾을 값 100만개를 vector에 저장한다
+
+	cout << "백터에 인덱스 100만개를 생성하였다" << endl;
+	vector<int> v;
+	v.reserve(100'0000);
+	for (int i = 0; i < 100'0000; ++i)
+	{
+		v.push_back(uid(dre));
+	}
+
+	{
+		cout << "임의의 정수 100만개를 map에서 찾아보자" << endl;
+		cout << "찾기 시작" << endl;
+
+		auto b = steady_clock::now();
+
+		for (int i = 0; i < 100'0000; ++i)
+			m.find(v[i]);
+
+		auto d = duration_cast<milliseconds>(steady_clock::now() - b).count();
+
+		cout << "걸린 시간은 - " << d << endl;
+	}
+
+	{
+		cout << "임의의 정수 100만개를 unordered map에서 찾아보자" << endl;
+		cout << "찾기 시작" << endl;
+
+		auto b = steady_clock::now();
+
+		for (int i = 0; i < 100'0000; ++i)
+			um.find(v[i]);
+
+		auto d = duration_cast<milliseconds>(steady_clock::now() - b).count();
+
+		cout << "걸린 시간은 - " << d << endl;
+	}
+
+
+	save("소스.cpp");
+}
