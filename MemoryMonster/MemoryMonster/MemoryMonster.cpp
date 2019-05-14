@@ -12,14 +12,14 @@ MemoryMonster::MemoryMonster(int n) : num{ n }//생성자
 
 	for (int i = 0; i < num; ++i)
 		p[i] = uid(dre);
-	std::cout << "생성자(int) - " << this << ", 할당 메모리 - " << (void*)p << std::endl; 
+	//std::cout << "생성자(int) - " << this << ", 할당 메모리 - " << (void*)p << std::endl; 
 	//번지수를 적으려면 void*라고 캐스팅해줘야해. char*로 되어있어서 내용적음
 
 }
 
 MemoryMonster::~MemoryMonster()
 {
-	std::cout << "소멸자 - " << this << ", 할당 메모리 - " << (void*)p << std::endl; 
+	//std::cout << "소멸자 - " << this << ", 할당 메모리 - " << (void*)p << std::endl; 
 	//번지수를 적으려면 void*라고 캐스팅해줘야해. char*로 되어있어서 내용적음
 
 	if (p != nullptr)
@@ -28,7 +28,7 @@ MemoryMonster::~MemoryMonster()
 
 MemoryMonster& MemoryMonster::operator=(const MemoryMonster& other) {
 
-	std::cout << "복사할당" << std::endl;
+	//std::cout << "복사할당" << std::endl;
 	if (this == &other)
 		return *this;
 
@@ -42,7 +42,7 @@ MemoryMonster::MemoryMonster(const MemoryMonster& other) : num(other.num)//깊은�
 {
 	p = new char[num];
 	memcpy(p, other.p, num);
-	std::cout << "복사생성자 - " << this << ", 원본 " << &other << ", 할당 메모리 - " << (void*)p << std::endl; 
+	//std::cout << "복사생성자 - " << this << ", 원본 " << &other << ", 할당 메모리 - " << (void*)p << std::endl; 
 	//번지수를 적으려면 void*라고 캐스팅해줘야해. char*로 되어있어서 내용적음
 
 }
@@ -52,7 +52,7 @@ MemoryMonster::MemoryMonster(MemoryMonster&&other) : num{ other.num }//이동 생성
 	p = other.p;
 	other.p = nullptr;
 	other.num = 0;
-	std::cout << "이동 생성자 - " << this << ", 원본 " << &other << ", 할당 메모리 - " << (void*)p << std::endl; 
+	//std::cout << "이동 생성자 - " << this << ", 원본 " << &other << ", 할당 메모리 - " << (void*)p << std::endl; 
 	//번지수를 적으려면 void*라고 캐스팅해줘야해. char*로 되어있어서 내용적음
 
 }
@@ -78,7 +78,7 @@ char* MemoryMonster::getData() const {
 }
 
 MemoryMonster& MemoryMonster::operator=(MemoryMonster&& other) {
-	std::cout << "이동할당" << std::endl;
+	//std::cout << "이동할당" << std::endl;
 	delete[] p;
 	num = other.num;
 	p = other.p;
@@ -107,4 +107,24 @@ bool MemoryMonster::operator<(const MemoryMonster& rhs) const
 	if (num == rhs.num)
 		return true;
 	return false;
+}
+
+typename MemoryMonster::iterator MemoryMonster::begin()
+{
+	return p;
+}
+
+typename MemoryMonster::iterator MemoryMonster::end()
+{
+	return p + num;
+}
+
+typename MemoryMonster::reverse_iterator MemoryMonster::rbegin()
+{
+	return revIter(end());
+}
+
+typename MemoryMonster::reverse_iterator MemoryMonster::rend()
+{
+	return revIter(begin());
 }

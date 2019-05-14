@@ -7,7 +7,78 @@
 //---------------------------------------------------------
 #include <random>
 using namespace std;
+#include <iterator>
 
+class MemoryMonster;
+
+// 내가만든 MemoryMonster의 역반복자를
+// 표준 반복자로 만들려면 반복자에 필요한 타입 5가지를 정의하여야 한다
+// 표준 반복자를 상속받는 것이 편하다
+
+class revIter : public std::iterator<std::random_access_iterator_tag, char>
+{
+	char* p;
+public:
+	revIter(char* p) : p{ p } {};
+	revIter operator++()
+	{
+		--p;
+		return *this;
+	};
+	revIter operator++(int)
+	{
+		revIter temp{ *this };
+		--p;
+		return temp;
+	};
+
+	revIter operator--()
+	{
+		++p;
+		return *this;
+	};
+	revIter operator--(int)
+	{
+		revIter temp{ *this };
+		++p;
+		return temp;
+	};
+
+	bool operator!=(const revIter& other) const
+	{
+		return p != other.p;
+	}
+
+	bool operator==(const revIter& other) const
+	{
+		return p == other.p;
+	}
+
+	char operator*()
+	{
+		return *(p-1);
+	}
+
+	std::ptrdiff_t operator-(const revIter& other) const
+	{
+		return p - other.p;
+	}
+	
+	char* operator+(std::ptrdiff_t n) const
+	{
+		return p + n;
+	}
+
+	char* operator-(std::ptrdiff_t n) const
+	{
+		return p - n;
+	}
+
+	bool operator<(const revIter& other) const
+	{
+		return *p < *(other.p);
+	}
+};
 
 
 class MemoryMonster {
@@ -40,4 +111,16 @@ public:
 	bool operator == (const MemoryMonster& rhs) const;
 
 	bool operator<(const MemoryMonster& rhs) const;
+
+	// typedef char* iterator; 구식
+	using iterator = char*; // 신식
+
+	using reverse_iterator = revIter;
+	using value_type = char;
+
+	iterator begin();
+	iterator end();
+
+	reverse_iterator rbegin();
+	reverse_iterator rend();
 };
