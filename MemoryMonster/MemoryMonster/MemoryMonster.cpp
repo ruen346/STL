@@ -109,22 +109,12 @@ bool MemoryMonster::operator<(const MemoryMonster& rhs) const
 	return false;
 }
 
-typename MemoryMonster::iterator MemoryMonster::begin()
+Iter MemoryMonster::begin()
 {
-	return p;
+	return Iter(p);
 }
 
-typename MemoryMonster::iterator MemoryMonster::end()
+Iter MemoryMonster::end()
 {
-	return p + num;
-}
-
-typename MemoryMonster::reverse_iterator MemoryMonster::rbegin()
-{
-	return revIter(end());
-}
-
-typename MemoryMonster::reverse_iterator MemoryMonster::rend()
-{
-	return revIter(begin());
+	return Iter(p + num);
 }

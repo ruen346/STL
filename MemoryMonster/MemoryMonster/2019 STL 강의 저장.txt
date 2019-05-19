@@ -3326,3 +3326,113 @@ int main()
 
 	save("소스.cpp");
 }
+
+============================
+ Fri May 17 11:11:14 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+#include <vector>;
+
+// STL 표준을 만족하는 
+//	   반복자 만들기
+//     컨테이너 만들기
+// 표준 STL 컨테이너 처럼 동작하게 한다.
+
+int main()
+{
+	MemoryMonster m{ 3000 };
+
+	sort(m.begin(), m.end());
+
+	for (char c : m)
+		cout << c;
+	cout << endl;
+
+	save("소스.cpp");
+}
+
+
+
+///////////////////////////////////////// 안돌가긴하는데
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+using namespace std;
+#include <vector>;
+
+// STL 표준을 만족하는 
+//	   반복자 만들기
+//     컨테이너 만들기
+// 표준 STL 컨테이너 처럼 동작하게 한다.
+
+int x;
+class f
+{
+	vector<int> v;
+public:
+	f(const vector<int>& v) : v{ v } {};
+	
+	int& operator*(int n)
+	{
+		v.push_back(n);
+		return x;
+	}
+
+	void operator++() {};
+	void operator++(int) {};
+};
+
+template <class InIter, class OutIter>
+void myCopy(InIter b, InIter e, OutIter d)
+{
+	while (b != e)
+	{
+		*d = *b;
+		++b;
+		++d;
+	}
+}
+
+class F
+{
+	vector<int>& v;
+
+public:
+	F(vector<int>& v) : v{ v } {}
+	F& operator*()
+	{
+		return *this;
+	}
+
+	void operator=(int n)
+	{
+		v.push_back(n);
+	}
+
+	void operator++()
+	{
+		
+	};
+};
+
+int main()
+{
+	vector<int> v;
+
+	myCopy(istream_iterator<int>(cin), istream_iterator<int>(), F{ v });
+
+	for (int d : v)
+	{
+		cout << d << endl;
+	}
+
+	//save("소스.cpp");
+}
+
+
+

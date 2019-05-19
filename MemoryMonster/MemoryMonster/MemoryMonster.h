@@ -10,6 +10,7 @@ using namespace std;
 #include <iterator>
 
 class MemoryMonster;
+class Iter; // forward declaration
 
 // 내가만든 MemoryMonster의 역반복자를
 // 표준 반복자로 만들려면 반복자에 필요한 타입 5가지를 정의하여야 한다
@@ -112,15 +113,75 @@ public:
 
 	bool operator<(const MemoryMonster& rhs) const;
 
-	// typedef char* iterator; 구식
-	using iterator = char*; // 신식
+	Iter begin();
+	Iter end();
+};
 
-	using reverse_iterator = revIter;
-	using value_type = char;
+class Iter : public std::iterator<std::random_access_iterator_tag, char>
+{
+	iterator::pointer p;
 
-	iterator begin();
-	iterator end();
+public:
+	Iter(iterator::pointer p) :p{ p } {}
 
-	reverse_iterator rbegin();
-	reverse_iterator rend();
+	iterator::difference_type operator-(const Iter& other) const
+	{
+		return p - other.p;
+	}
+
+	Iter operator+(iterator::difference_type n) const
+	{
+		return Iter(p + n);
+	}
+	Iter operator-(iterator::difference_type n) const
+	{
+		return Iter(p - n);
+	}
+
+	bool operator<(const Iter& other) const
+	{
+		return p < other.p;
+	}
+
+	Iter& operator++()
+	{
+		++p;
+		return *this;
+	}
+	Iter operator++(int)
+	{
+		Iter temp{ *this };
+		++p;
+		return temp;
+	}
+	Iter& operator--()
+	{
+		--p;
+		return *this;
+	}
+	Iter operator--(int)
+	{
+		Iter temp{ *this };
+		--p;
+		return temp;
+	}
+
+	iterator::value_type operator*() const
+	{
+		return *p;
+	}
+
+	iterator::reference operator*()
+	{
+		return *p;
+	}
+
+	bool operator!=(const Iter& other) const
+	{
+		return p != other.p;
+	}
+	bool operator==(const Iter& other) const
+	{
+		return p == other.p;
+	}
 };
