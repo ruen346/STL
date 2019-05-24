@@ -1,20 +1,30 @@
 #include <iostream>
 #include "MemoryMonster.h"
 #include "save.h"
+#include <algorithm>
 using namespace std;
-#include <vector>;
+#include <vector>
+#include <numeric>
+#include <iomanip>
+#include <random>
+#include <string>
 
-InIter myFind(InIter b, InIter e, Value v)
-{
+// 검색
 
-}
+// find - 
+// find_if -
+// find_if_not - 
+// find_first_of - 
+// adjacent_find - 
+// find_end -
+
+// search - 
+// search_n - 
+
+
 
 int main()
 {
-	string s{ "Hello, world!" };
 
-	auto p = myFind(s.begin(), s.end(), '!');
-	cout << *p << endl;
-
-	//save("소스.cpp");
+	save("소스.cpp");
 }
