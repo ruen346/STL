@@ -1,4 +1,9 @@
 ﻿  소스.cpp
 c:\users\구건모\desktop\개발\stl\memorymonster\memorymonster\save.h(29): warning C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\time.h(476): note: 'ctime' 선언을 참조하십시오.
-c:\users\구건모\desktop\개발\stl\memorymonster\memorymonster\소스.cpp(18): error C2760: 구문 오류: '식별자'은(는) 예기치 않은 토큰입니다. 필요한 토큰은 ';'입니다.
+  코드를 생성하고 있습니다.
+  1 of 292 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  MemoryMonster.vcxproj -> C:\Users\구건모\Desktop\개발\STL\MemoryMonster\x64\Release\MemoryMonster.exe

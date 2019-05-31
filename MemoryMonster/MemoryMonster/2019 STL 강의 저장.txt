@@ -4333,3 +4333,101 @@ int main()
 
 	save("소스.cpp");
 }
+
+============================
+ Fri May 31 10:36:52 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <algorithm>
+using namespace std;
+#include <vector>
+#include <numeric>
+#include <iomanip>
+#include <random>
+#include <string>
+#include <list>
+
+// 7. 다양한 알고리즘
+//    - 이 알고리즘은 이름만 읽어봐도 기능을 알 수 있다.
+
+int main()
+{
+	vector<int> v{ 1,2,3,4,5 }; // set 면 v.end(), v.begin() 이거하면 안끝남..
+
+	int d = distance(v.begin(), v.end()); // ++몇번에 도달 가능한가?
+	int d2 = distance(v.end(), v.begin()); // --몇번에 도달 가능한가?
+
+	cout << "거리는 : " << d << endl;
+	cout << "거리는 : " << d2 << endl;
+
+	save("소스.cpp");
+}
+
+============================
+ Fri May 31 11:12:26 2019
+============================
+
+#include <iostream>
+#include "MemoryMonster.h"
+#include "save.h"
+#include <algorithm>
+using namespace std;
+#include <vector>
+#include <numeric>
+#include <iomanip>
+#include <random>
+#include <string>
+#include <list>
+
+// 7. 다양한 알고리즘
+//    - 이 알고리즘은 이름만 읽어봐도 기능을 알 수 있다.
+
+template <class Iter>
+typename Iter::difference_type my_distance(Iter b, Iter e);
+
+template <class Iter>
+typename Iter::difference_type my_distance(Iter b, Iter e, random_access_iterator_tag);
+
+template <class Iter>
+typename Iter::difference_type my_distance(Iter b, Iter e, input_iterator_tag);
+
+
+int main()
+{
+	vector<int> v{ 1,2,3,4,5 };
+	list<int> l{ 1,2,3,4,5 };
+
+	int d = my_distance(v.begin(), v.end());
+	int d2 = my_distance(l.end(), l.begin());
+
+	cout << "vector 원소의 갯수 : " << d << endl;
+	cout << "list 원소의 갯수 : " << d2 << endl;
+
+	save("소스.cpp");
+}
+
+template <class Iter>
+typename Iter::difference_type my_distance(Iter b, Iter e)
+{
+	return my_distance(b, e, Iter::iterator_category());
+}
+
+template <class Iter>
+typename Iter::difference_type my_distance(Iter b, Iter e, random_access_iterator_tag)
+{
+	return e - b;
+}
+
+template <class Iter>
+typename Iter::difference_type my_distance(Iter b, Iter e, input_iterator_tag)
+{
+	typename Iter::difference_type cnt{ 0 };
+
+	while (b++ != e)
+		cnt++;
+	
+	return cnt;
+}
