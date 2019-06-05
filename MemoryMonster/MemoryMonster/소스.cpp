@@ -21,41 +21,32 @@ using namespace std;
 
 void readData();
 
-vector<string> v;
+struct PS : pair<string, string>
+{
+	PS(string s) : pair(s, s) 
+	{
+		sort(first.begin(), first.end());
+	}
+};
+
+vector<PS> v;
 
 int main()
 {
 	readData(); 
-	
-	while (true)
+	sort(v.begin(), v.end(), [](const PS& a, const PS& b)
 	{
-		cout << "Anagram 찾으실 단어를 입력해주세요 : ";
-		string s;
-		cin >> s;
+		return a.first < b.first;
+	});
 
-		bool b = binary_search(v.begin(), v.end(), s);
+	// 모든 anagram 쌍을 찾아 파일에 기록하라.
+	auto p = adjacent_find(v.begin(), v.end(), [](const PS& a, const PS& b)
+	{
+		return a.first == b.first;
+	});
 
-		if (b)
-		{
-			cout << s << "의 anagram을 찾는 중..." << endl;
-
-			string sc{ s };
-
-			do
-			{
-				next_permutation(sc.begin(), sc.end());
-
-				cout << sc << "\r";
-
-				if (binary_search(v.begin(), v.end(), sc))
-					cout << sc << " ";
-			} while (s != sc);
-			cout << endl << endl;
-		}
-		else
-			cout << s << "는 사전에 없는 단어입니다" << endl << endl;
-	}
-	
+	for(int i = 0; i < 5; ++i, ++p)
+		cout << p->first << " --- " << p->second << endl;
 
 	// save("소스.cpp");
 }
