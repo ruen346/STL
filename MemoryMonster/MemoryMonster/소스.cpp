@@ -39,16 +39,87 @@ int main()
 		return a.first < b.first;
 	});
 
-	// 모든 anagram 쌍을 찾아 파일에 기록하라.
-	auto p = adjacent_find(v.begin(), v.end(), [](const PS& a, const PS& b)
+
+	// anagram 쌍을 단어 갯수 내림 차순으로 정렬하여 파일에 기록하라
+	auto i = v.begin();
+
+	int idx;
+
+	vector<list<string>>vl;
+	vl.reserve(31000);
+
+	while (true)
 	{
-		return a.first == b.first;
+		i = adjacent_find(i, v.end(), [](const PS& a, const PS& b)
+		{
+			return a.first == b.first;
+		});
+
+		if (i == v.end())
+			break;
+
+		auto j = find_if_not(i + 1, v.end(), [i](const PS& a)
+		{
+			return i->first == a.first;
+		});
+
+		// [i, j]는 애너그램 쌍이다.
+		list<string> t;
+
+		for (auto k = i; k < j; ++k)
+			 t.push_back(k->second);
+
+		vl.push_back(t);
+
+		i = j;
+	}
+
+	// cout << idx - 1 << "개의 애너그램 쌍을 찾았습니다" << endl;
+
+	sort(vl.begin(), vl.end(), [](const list<string>& a, const list<string>& b)
+	{
+		return a.size() > b.size();
 	});
 
-	for(int i = 0; i < 5; ++i, ++p)
-		cout << p->first << " --- " << p->second << endl;
+	ofstream out("애너그램 길이순서.txt");
 
-	// save("소스.cpp");
+	for (const list<string>& d : vl)
+	{
+		for (const string& s : d)
+		{
+			out << s << " ";
+		}
+		out << endl;
+	}
+
+	out << "제일 갯수가 많은 쌍은 " << vl[0].size() << endl;
+
+
+	/*
+	while (true)
+	{
+		cout << "찾을 단어 : "; string s; cin >> s;
+		PS ps{ s };
+
+		cout << ps.first << " --- " << ps.second << endl;
+
+		if (binary_search(v.begin(), v.end(), ps, [](const PS& a, const PS& b) 
+		{
+			return a.first < b.first;
+		}))
+		{
+			cout << "사전에 있다" << endl;
+		}
+		else
+		{
+			cout << "사전에 없다" << endl;
+		}
+		cout << endl;
+	}
+	*/
+
+
+	save("소스.cpp");
 }
 
 void readData()
