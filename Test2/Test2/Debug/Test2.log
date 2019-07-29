@@ -1,59 +1,6 @@
-﻿  소스.cpp
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xutility(1108): error C2672: 'operator __surrogate_func': 일치하는 오버로드된 함수가 없습니다.
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xutility(1107): note: 컴파일 중인 함수 템플릿 인스턴스화 'bool std::_Debug_lt_pred<_Pr&,Player&,Player&>(std::less<void>&,_Ty1,_Ty2) noexcept(<expr>)'에 대한 참조를 확인하십시오.
-          with
-          [
-              _Pr=std::less<void>,
-              _Ty1=Player &,
-              _Ty2=Player &
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(4000): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::pair<_RanIt,_RanIt> std::_Partition_by_median_guess_unchecked<_RanIt,_Pr>(_RanIt,_RanIt,_Pr)'에 대한 참조를 확인하십시오.
-          with
-          [
-              _RanIt=Player *,
-              _Pr=std::less<void>
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(4034): note: 컴파일 중인 함수 템플릿 인스턴스화 'void std::_Sort_unchecked<Player*,_Fn>(_RanIt,_RanIt,int,_Pr)'에 대한 참조를 확인하십시오.
-          with
-          [
-              _Fn=std::less<void>,
-              _RanIt=Player *,
-              _Pr=std::less<void>
-          ]
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(4040): note: 컴파일 중인 함수 템플릿 인스턴스화 'void std::sort<_RanIt,std::less<void>>(const _RanIt,const _RanIt,_Pr)'에 대한 참조를 확인하십시오.
-          with
-          [
-              _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<Player>>>,
-              _Pr=std::less<void>
-          ]
-  c:\users\구건모\desktop\개발\stl\test2\test2\소스.cpp(63): note: 컴파일 중인 함수 템플릿 인스턴스화 'void std::sort<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>>(const _RanIt,const _RanIt)'에 대한 참조를 확인하십시오.
-          with
-          [
-              _Ty=Player,
-              _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<Player>>>
-          ]
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xutility(1108): error C2893: 'unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) const' 함수 템플릿을 특수화하지 못했습니다.
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xutility(1108): note: 다음 템플릿 인수 사용:
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xutility(1108): note: '_Ty1=Player &'
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xutility(1108): note: '_Ty2=Player &'
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\xutility(1108): error C2056: 식이 잘못되었습니다.
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3907): error C2672: 'operator __surrogate_func': 일치하는 오버로드된 함수가 없습니다.
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3907): error C2893: 'unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) const' 함수 템플릿을 특수화하지 못했습니다.
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3907): note: 다음 템플릿 인수 사용:
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3907): note: '_Ty1=Player &'
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3907): note: '_Ty2=Player &'
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3914): error C2672: 'operator __surrogate_func': 일치하는 오버로드된 함수가 없습니다.
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3914): error C2893: 'unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) const' 함수 템플릿을 특수화하지 못했습니다.
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3914): note: 다음 템플릿 인수 사용:
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3914): note: '_Ty1=Player &'
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3914): note: '_Ty2=Player &'
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3929): error C2672: 'operator __surrogate_func': 일치하는 오버로드된 함수가 없습니다.
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3929): error C2893: 'unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) const' 함수 템플릿을 특수화하지 못했습니다.
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3929): note: 다음 템플릿 인수 사용:
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3929): note: '_Ty1=Player &'
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3929): note: '_Ty2=Player &'
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3949): error C2672: 'operator __surrogate_func': 일치하는 오버로드된 함수가 없습니다.
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3949): error C2893: 'unknown-type std::less<void>::operator ()(_Ty1 &&,_Ty2 &&) const' 함수 템플릿을 특수화하지 못했습니다.
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3949): note: 다음 템플릿 인수 사용:
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3949): note: '_Ty1=Player &'
-  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\algorithm(3949): note: '_Ty2=Player &'
+﻿  소스1.cpp
+c:\users\구건모\desktop\개발\stl\test2\test2\소스1.cpp(26): warning C4244: 'return': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\stl\test2\test2\소스1.cpp(31): warning C4244: 'return': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\stl\test2\test2\소스1.cpp(36): warning C4244: 'return': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\구건모\desktop\개발\stl\test2\test2\소스1.cpp(45): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+  Test2.vcxproj -> C:\Users\구건모\Desktop\개발\STL\Test2\Debug\Test2.exe
